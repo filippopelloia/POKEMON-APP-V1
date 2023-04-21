@@ -1,6 +1,7 @@
 import {useState, useEffect, useCallback} from 'react'
 import Header from '../components/Header.jsx'
 import axios from 'axios'
+import Card from './Card.jsx'
 
 
 export default function Regions() {
@@ -157,26 +158,23 @@ export default function Regions() {
 
         <div className="national-section">
 
-          {filteredResult.map((item, index) => (
-            <div key={index} className='pokemon-section'>
+          {filteredResult.map((item) => {
+          return (
+            <Card key={item.id} 
+                            id={item.id}
+                            shiny={shiny}
+                            name={item.name}
+                            upper={item.name[0]?.toUpperCase()}
+                            slice={item.name.slice(1)}
+                            front_shiny={item?.sprites?.front_shiny}
+                            front_default={item?.sprites?.front_default}
+                            firstType={item?.types[0].type.name}
+                            secondType={item?.types[1]?.type.name}
+            />
+          );
+          })}
 
-              <img className="sprite" 
-                   src={shiny ? item?.sprites.front_shiny : item?.sprites.front_default} 
-                   alt={item.name} 
-              />
 
-              <h3>{item.name[0].toUpperCase() + item.name.slice(1)}</h3>
-
-              <div className="pokemon-types">
-                  <h6 className={item.types[0].type.name}>{item.types[0].type.name}</h6>
-
-                  {/* MOSTRA SECONDO TIPO SE ESISTE */}
-                  {item?.types[1]?.type?.name && <h6 className={item.types[1].type.name}>{item.types[1].type.name}</h6>}
-              </div>
-
-
-            </div>
-          ))}
 
         </div>
 

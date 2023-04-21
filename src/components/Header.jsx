@@ -19,7 +19,7 @@ export default function Header(props) {
       <div className="shinymode">
         <h6 style={{color: props.shiny ? '#a6a6a6' : 'black'}}>NORMAL</h6>
         <label className="switch">
-          <input type="checkbox" onClick={props.changeMode} />
+          <input data-testid="switchButton" type="checkbox" onClick={props.changeMode} />
           <span className="slider round"></span>
         </label>
         <h6 style={{color: props.shiny ? 'black' : '#a6a6a6'}}>SHINY</h6>
