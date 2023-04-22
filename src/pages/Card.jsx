@@ -4,7 +4,8 @@ export default function Card(props) {
 
 
   return (
-            <div key={props.id} className="pokemon-section" data-testid="sections">
+            // <div key={props.id} className="pokemon-section" data-testid="sections">
+            <div key={props.id} className="pokemon-section" data-testid='sections'>
               <img
                 className="sprite"
                 src={props.shiny === true ? props.front_shiny : props.front_default}

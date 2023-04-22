@@ -22,7 +22,7 @@ export const handlers = [
                             name: 'flying',
                         },
                     },
-                ],
+                ]
             })
         )
     })

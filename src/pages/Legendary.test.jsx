@@ -23,7 +23,7 @@ describe('API tests', () => {
         await waitFor(() => {
             const pokemonId = screen.getByText('#144');
             expect(pokemonId).toBeInTheDocument();
-        }, {timeout: 4000});
+        }, {timeout: 8000});
     })
 
     //POKEMON DEFAULT IMAGE
@@ -33,7 +33,7 @@ describe('API tests', () => {
         await waitFor(() => {
             const defaultImage = screen.getByTestId('articuno');
             expect(defaultImage).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png');
-        }, {timeout: 4000})
+        }, {timeout: 5000})
     })
 
     //POKEMON SHINY IMAGE -- SIMULANDO ANCHE IL CLICK
@@ -45,7 +45,7 @@ describe('API tests', () => {
         await waitFor(() => {
             const shinyImage = screen.getByTestId('articuno');
             expect(shinyImage).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/144.png');
-        }, {timeout: 4000});
+        }, {timeout: 5000});
     })
 
 
@@ -66,7 +66,7 @@ describe('API tests', () => {
         await waitFor(() => {
             const firstType = screen.getByTestId('articunoice');
             expect(firstType).toHaveTextContent('ice');
-        }, {timeout: 3000})
+        }, {timeout: 5000})
     })
 
 

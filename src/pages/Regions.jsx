@@ -16,8 +16,11 @@ export default function Regions() {
   }
 
 
+  console.log(region)
+
+
   //PRIMA LETTERA MAIUSCOLA
-  const CurrentRegion = actualRegion[0].toUpperCase() + actualRegion.slice(1)
+  // const CurrentRegion = actualRegion[0].toUpperCase() + actualRegion.slice(1)
 
 
   function getRegion(regione){
@@ -143,7 +146,7 @@ export default function Regions() {
         <Header shiny={shiny} changeMode={showShiny} handleInputChange={(event) => handleInputChange(event)} />
         <div className="regions">
           <button className="region-btn" onClick={(event) => getRegion(event)}>Kanto</button>
-          <button className="region-btn" onClick={(event) => getRegion(event)}>Johto</button>
+          <button data-testid="johtoRegion" className="region-btn" onClick={(event) => getRegion(event)}>Johto</button>
           <button className="region-btn" onClick={(event) => getRegion(event)}>Hoenn</button>
           <button className="region-btn" onClick={(event) => getRegion(event)}>Sinnoh</button>
           <button className="region-btn" onClick={(event) => getRegion(event)}>Unima</button>
@@ -153,7 +156,8 @@ export default function Regions() {
         </div>
 
 
-        <h2 className="region-current">Pokedex of {CurrentRegion}</h2>
+        {/* <h2 className="region-current">Pokedex of {CurrentRegion}</h2> */}
+        <h2 data-testid="currentRegion" className="region-current">Pokedex of {actualRegion}</h2>
 
 
         <div className="national-section">

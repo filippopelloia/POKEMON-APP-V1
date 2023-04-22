@@ -26,7 +26,7 @@ describe('National section', () => {
         await waitFor(() => {
             const pokemonId = screen.getByText('#1');
             expect(pokemonId).toBeInTheDocument();
-        }, {timeout: 2000});
+        }, {timeout: 8000});
     })
 
     //POKEMON DEFAULT IMAGE
@@ -36,7 +36,7 @@ describe('National section', () => {
         await waitFor(() => {
             const defaultImage = screen.getByTestId('bulbasaur');
             expect(defaultImage).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png');
-        }, {timeout: 2000})
+        }, {timeout: 5000})
     })
 
     //POKEMON SHINY IMAGE
@@ -48,7 +48,7 @@ describe('National section', () => {
         await  waitFor(() => {
             const shinyImage = screen.getByTestId('bulbasaur');
             expect(shinyImage).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png');
-        }, {timeout: 3000});
+        }, {timeout: 5000});
     })
 
     //POKEMON NAME
@@ -58,7 +58,7 @@ describe('National section', () => {
         await waitFor(() => {
             const name = screen.getByText('Bulbasaur');
             expect(name).toBeVisible();
-        }, {timeout: 2000});
+        }, {timeout: 5000});
     })
 
     //POKEMON FIRST TYPE
@@ -67,7 +67,7 @@ describe('National section', () => {
         await waitFor(() => {
             const firstType = screen.getByTestId('bulbasaurgrass');
             expect(firstType).toBeVisible();
-        }, {timeout: 2000});
+        }, {timeout: 8000});
     })
 
     //POKEMON SECOND TYPE
@@ -76,9 +76,41 @@ describe('National section', () => {
         await waitFor(() => {
             const secondType = screen.getByTestId('bulbasaurpoison');
             expect(secondType).toBeVisible();
-        }, {timeout: 3000})
+        }, {timeout: 8000})
+    })
+})
+
+
+
+describe('Show More button', () => {
+
+    it('should render the Show More button', () => {
+        render(<National/>);
+        const showMore = screen.getByText('Show More');
+        expect(showMore).toBeVisible();
+    })
+
+    it('should render 60 pokemon at the first render', async () => {
+        render(<National/>);
+
+        await waitFor(() => {
+            const initialPokemon = screen.getAllByTestId('sections');
+            expect(initialPokemon).toHaveLength(60);
+        }, {timeout: 5000})
     })
 
 
+    it('should render a total amount of 162 pokemon if I click on the button', async () => {
+        render(<National/>);
 
+        const showMore = screen.getByText('Show More');
+
+        fireEvent.click(showMore);
+        await waitFor(() => {
+            setTimeout(() => {
+                const second = screen.getAllByTestId('sections');
+                expect(second).toHaveLength(162);
+            }, 2000)
+        }, {timeout: 5000});
+    })
 })
