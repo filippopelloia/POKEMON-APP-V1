@@ -1,11 +1,11 @@
 import {render, screen, waitFor, fireEvent} from '@testing-library/react'
 import Legendary from './Legendary.jsx'
 import { setupServer } from 'msw/node';
-import { handlers } from '../mocks/handlers'; 
+import { handlersLegendary } from '../mocks/handlers-legendaty.jsx'; 
 
 
 // // CREO SERVER MSW
-const server = setupServer(...handlers)
+const server = setupServer(...handlersLegendary)
 
 // // Esegui il setup e il teardown del server MSW prima e dopo i test
 beforeAll(() => server.listen()); //PREPARA IL SERVER AL PRIMO AVVIO
@@ -16,7 +16,7 @@ afterEach(() => server.resetHandlers()); //CHIAMATA QUANDO FINISCE UN TEST PER P
 
 describe('FAKE API tests', () => {
 
-    it('should render the default image of Mewtwo', async () => {
+    it('should render the Mewtwo data', async () => {
         render(<Legendary/>);
         await waitFor(() => {
             const idMewtwo = screen.getByText('#id-150');
@@ -43,7 +43,7 @@ describe('FAKE API tests', () => {
 describe('API REAL tests', () => {
 
     //POKEMON CARD
-    it('should render the ID of the pokemon', async () => {
+    it('should render the data of a pokemon', async () => {
         render(<Legendary/>);
         await waitFor(() =>{
             setTimeout(() => {

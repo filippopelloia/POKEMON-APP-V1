@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 const indexLegends = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 570, 571, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649, 716, 717, 718, 719, 720, 772, 773, 785, 786, 787, 788, 789, 790, 791, 792, 800, 888, 889, 890, 891, 892, 894, 895, 896, 897, 898, 905];
 
-const handlers = indexLegends.map((id) => {
+const handlersLegendary = indexLegends.map((id) => {
   return rest.get(`https://pokeapi.co/api/v2/pokemon/${id}`, (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -30,7 +30,7 @@ const handlers = indexLegends.map((id) => {
   })
 });
 
-export { handlers };
+export { handlersLegendary };
 
 
 
