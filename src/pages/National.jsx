@@ -8,6 +8,7 @@ export default function National() {
   const [national, setNational] = React.useState([]);
   const [startingPokedex, setStartingPokedex] = React.useState(61)
   const [filteredResult, setFilteredResult] = React.useState(national);
+  const [error, setError] = React.useState()
 
   function showShiny() {
     setShiny(prevShiny => !prevShiny)
@@ -33,7 +34,8 @@ const getNationalPokemon = React.useCallback(() => {
           setNational(pokemonData)
 
       } catch (error) {
-          console.error(error)
+          // console.error(error)
+          setError('Error fetching National Pokedex')
       }
   }
   fetchData()
@@ -87,7 +89,7 @@ const handleInputChange = (event) => {
       <div className="data-section">
         <div className="national-section" style={{paddingBottom: '5.5vh'}}>
 
-
+          {/* {error === true && <p>{error}</p>} */}
 
           {filteredResult.map((item) => {
           return (
