@@ -7,7 +7,7 @@ const handlers = indexLegends.map((id) => {
     return res(
       ctx.status(200),
       ctx.json({
-        id:`${id}`,
+        id:`id-${id}`,
         name: `pokemon-${id}`,
         sprites: {
           front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
