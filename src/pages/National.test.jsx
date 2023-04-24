@@ -69,6 +69,7 @@ describe('API REAL tests', () => {
 })
 
 
+//INPUT
 describe('input test', () => {
 
     it('should render the results', async () => {
@@ -90,39 +91,42 @@ describe('input test', () => {
 })
 
 
+//SWITCH
+describe('button tests', () => {
+
+    it('should render the shiny images when I click on the switch', async () => {
+        render(<National/>);
+        await waitFor(() => {
+            setTimeout(() => {
+                const switchButton = screen.getByTestId('switchButton');
+                const venusaur = screen.getByTestId('Venusaur');
+                expect(venusaur).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png');
+
+                fireEvent.click(switchButton);
+                expect(venusaur).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/3.png');
+            }, 2000)
+        }, {timeout: 5000})
+    })
+
+})
 
 
-//BUTTON
+//BUTTON SHOW MORE
+describe('show more button tests', () => {
 
-// describe('Show More button', () => {
-
-//     it('should render the Show More button', () => {
-//         render(<National/>);
-//         const showMore = screen.getByText('Show More');
-//         expect(showMore).toBeVisible();
-//     })
-
-//     it('should render 60 pokemon at the first render', async () => {
-//         render(<National/>);
-
-//         await waitFor(() => {
-//             const initialPokemon = screen.getAllByTestId('sections');
-//             expect(initialPokemon).toHaveLength(60);
-//         }, {timeout: 5000})
-//     })
-
-
-//     it('should render a total amount of 162 pokemon if I click on the button', async () => {
-//         render(<National/>);
-
-//         const showMore = screen.getByText('Show More');
-
-//         fireEvent.click(showMore);
-//         await waitFor(() => {
-//             setTimeout(() => {
-//                 const second = screen.getAllByTestId('sections');
-//                 expect(second).toHaveLength(162);
-//             }, 2000)
-//         }, {timeout: 5000});
-//     })
-// })
+    it('should render the show more button', async () => {
+        render(<National/>);
+        await waitFor(() => {
+            setTimeout(() => {
+                const showMoreButton = screen.getByText('Show More');
+                expect(showMoreButton).toBeVisible();
+                const initialPokemon = screen.getAllByTestId('sections');
+                expect(initialPokemon).toHaveLength(670);
+        
+                fireEvent.click(showMoreButton);
+                const mewtwo = screen.getByText('Mewtwo');
+                expect(mewtwo).toBeVisible();
+            }, 2000)
+        }, {timeout: 5000})
+    })
+})

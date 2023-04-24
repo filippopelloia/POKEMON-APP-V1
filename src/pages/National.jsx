@@ -66,13 +66,6 @@ React.useEffect(() => {
 
 
 
-// console.log(startingPokedex)
-
-// if(startingPokedex < 905 && startingPokedex > 805){
-//   console.log(905 - startingPokedex)
-// }
-
-
 const handleInputChange = (event) => {
   const searchText = event.target.value.toLowerCase();
   const filteredData = national.filter(p => p.name.toLowerCase().startsWith(searchText));

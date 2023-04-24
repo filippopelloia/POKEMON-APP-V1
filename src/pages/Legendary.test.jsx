@@ -67,5 +67,45 @@ describe('API REAL tests', () => {
 })
 
 
+//INPUT
+describe('input test', () => {
+
+    it('should render the results', async () => {
+        render(<Legendary/>);
+        await waitFor(() => {
+            setTimeout(() => {
+                const hoohName = screen.getByText('Ho-oh');
+                const input = screen.getByPlaceholderText('Search');
+                expect(hoohName).toBeVisible();
+                
+                fireEvent.change(input, {target: {value: 'Lugia'}})
+                const lugiaName = screen.getByText('Lugia');
+                expect(lugiaName).toBeVisible();
+                expect(hoohName).not.toBeVisible();
+            }, 2000)
+        }, {timeout: 5000})
+     })
+
+})
+
+
+//SWITCH
+describe('button tests', () => {
+
+    it('should render the shiny images when I click on the switch', async () => {
+        render(<Legendary/>);
+        await waitFor(() => {
+            setTimeout(() => {
+                const switchButton = screen.getByTestId('switchButton');
+                const lugia = screen.getByTestId('Lugia');
+                expect(lugia).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png');
+
+                fireEvent.click(switchButton);
+                expect(lugia).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/249.png');
+            }, 2000)
+        }, {timeout: 5000})
+    })
+
+})
 
  

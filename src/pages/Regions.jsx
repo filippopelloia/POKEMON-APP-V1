@@ -16,7 +16,7 @@ export default function Regions() {
   }
 
 
-  console.log(region)
+  console.log(actualRegion)
 
 
   //PRIMA LETTERA MAIUSCOLA
