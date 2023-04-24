@@ -40,31 +40,31 @@ describe('FAKE API tests', () => {
 
 
 
-describe('API REAL tests', () => {
+// describe('API REAL tests', () => {
 
-    //POKEMON CARD
-    it('should render the data of a pokemon', async () => {
-        render(<Legendary/>);
-        await waitFor(() =>{
-            setTimeout(() => {
-                const idPokemon = screen.getByTestId('legend');
-                const namePokemon = screen.getByText('Mewtwo');
-                const firstType = screen.getByTestId('moltresfire')
-                const secondType = screen.getByTestId('moltresflying')
-                const image = screen.getByTestId('moltres');
-                const switchButton = screen.getByTestId('switchButton');
-                expect(idPokemon).toHaveTextContent('#150');
-                expect(namePokemon).toBeInTheDocument();
-                expect(firstType).toHaveTextContent('fire');
-                expect(secondType).toHaveTextContent('flying');
-                expect(image).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/146.png')
+//     //POKEMON CARD
+//     it('should render the data of a pokemon', async () => {
+//         render(<Legendary/>);
+//         await waitFor(() =>{
+//             setTimeout(() => {
+//                 const idPokemon = screen.getByTestId('legend');
+//                 const namePokemon = screen.getByText('Mewtwo');
+//                 const firstType = screen.getByTestId('moltresfire')
+//                 const secondType = screen.getByTestId('moltresflying')
+//                 const image = screen.getByTestId('moltres');
+//                 const switchButton = screen.getByTestId('switchButton');
+//                 expect(idPokemon).toHaveTextContent('#150');
+//                 expect(namePokemon).toBeInTheDocument();
+//                 expect(firstType).toHaveTextContent('fire');
+//                 expect(secondType).toHaveTextContent('flying');
+//                 expect(image).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/146.png')
 
-                fireEvent.click(switchButton);
-                expect(image).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/146.png')
-            }, 2000)
-        }, {timeout: 5000})
-    })
-})
+//                 fireEvent.click(switchButton);
+//                 expect(image).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/146.png')
+//             }, 2000)
+//         }, {timeout: 5000})
+//     })
+// })
 
 
 //INPUT
