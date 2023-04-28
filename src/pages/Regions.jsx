@@ -19,9 +19,6 @@ export default function Regions() {
   console.log(actualRegion)
 
 
-  //PRIMA LETTERA MAIUSCOLA
-  // const CurrentRegion = actualRegion[0].toUpperCase() + actualRegion.slice(1)
-
 
   function getRegion(regione){
     setActualRegion(regione)
@@ -126,19 +123,6 @@ export default function Regions() {
 
 
 
-  // let RegionBack = {}
-
-  // if(actualRegion === 'Galar'){
-  //   RegionBack = {opacity: 1}
-  // }else if(actualRegion === region){
-  //   RegionBack = {opacity: 1}
-  // }else{
-  //   RegionBack = {opacity: 0.75}
-  // }
-
-
-
-
 
   return (
     <div className='region main'>
@@ -156,7 +140,6 @@ export default function Regions() {
         </div>
 
 
-        {/* <h2 className="region-current">Pokedex of {CurrentRegion}</h2> */}
         <h2 data-testid="currentRegion" className="region-current">Pokedex of {actualRegion}</h2>
 
 
