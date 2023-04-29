@@ -6,18 +6,18 @@ import axios from 'axios'
 
 export default function Type() {
 
-  const[data, setData] = useState([])
-
-  const[actualType, setActualType] = useState('fire')
-  const[type, setType] = useState([])
-  const[shiny, setShiny] = useState(false)
+  const [data, setData] = useState([])
+  const [actualType, setActualType] = useState('fire')
+  const [type, setType] = useState([])
+  const [shiny, setShiny] = useState(false)
   const [startingPokedex, setStartingPokedex] = useState(200)
   const [filteredResult, setFilteredResult] = useState(type);
 
+
+  //MOSTRA SHINY
   function showShiny(){
       setShiny(prevShiny => !prevShiny)
   }
-
 
 
   //PRIMA LETTERA MAIUSCOLA
@@ -42,11 +42,12 @@ const getTypePokemon = useCallback(() => {
           const pokemonData = responses.map(res => res.data)
 
           setData(pokemonData)
+          
 
-          //AGGIUNGI IL FILTRAGGIO DEI DATI DRAGON
+          //AGGIUNGI IL FILTRAGGIO DEI DATI FIRE
           const currentType = []
           pokemonData.map(item => {
-            if(item.types[0].type.name === 'fire' || item?.types[1]?.type?.name === 'fire'){
+            if(item.types[0].type.name === actualType || item?.types[1]?.type?.name === actualType){
               currentType.push(item)
             }
           })
@@ -57,31 +58,15 @@ const getTypePokemon = useCallback(() => {
       }
   }
   fetchData()
-}, [startingPokedex])
+}, [startingPokedex, actualType])
+
+
 
 
 //VA AD INNESCARE UNA SOLA VOLTA LO useCallback con la chiamata API
 useEffect(() => {
   getTypePokemon()
 }, [getTypePokemon])
-
-
-
-
-
-//FILTRAGGIO DEI POKEMON IN BASE AL TIPO
-useEffect(() => {
-
-  const currentType = []
-  data.map(item => {
-    if(item.types[0].type.name === actualType | item?.types[1]?.type?.name === actualType){
-      currentType.push(item)
-    }
-  })
-  setType(currentType)
-
-}, [actualType])
-
 
 
 
@@ -93,7 +78,7 @@ useEffect(() => {
 
 
 
-
+//FUNZIONE CHE AGGIUNGE NUMERI POKEMON AL LIMITE ATTUALE  
 function handleShowMore(){
   if(startingPokedex < 906 && startingPokedex > 805){
     setStartingPokedex(prevStartingPokedex => prevStartingPokedex +(906 - prevStartingPokedex))
@@ -105,9 +90,7 @@ function handleShowMore(){
 
 
 
-
-
-
+//FUNZIONE DI RICERCA INPUT
 const handleInputChange = (event) => {
   const searchText = event.target.value.toLowerCase();
   const filteredData = type.filter(p => p.name.toLowerCase().startsWith(searchText));

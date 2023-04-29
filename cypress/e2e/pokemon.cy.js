@@ -44,11 +44,16 @@ describe('National page', () => {
 
     cy.wait(4000);
     cy.get('.show-button').click();
-    cy.wait(3000);
+    cy.wait(4000);
     cy.inputSearchMewtwo();
   })
 
 })
+
+
+
+
+
 
 
 
@@ -70,7 +75,7 @@ describe('Regions page', () => {
     cy.wait(3000);
     cy.get('.regions > :nth-child(1)').should('be.visible');
     cy.get('.regions > :nth-child(1)').click();
-    cy.wait(1000);
+    cy.wait(2000);
     cy.get('.national-section').find('.pokemon-section').should('have.length', 151);
   })
 
@@ -175,9 +180,9 @@ describe('Type page', () => {
 
     cy.visit('/types')
 
-    cy.wait(24000);
+    cy.wait(3000);
     cy.get('[style="background-color: rgb(246, 113, 119);"]').click();
-    cy.wait(6000);
+    cy.wait(3000);
     cy.inputSearchMewtwo();
   })
   
@@ -194,7 +199,7 @@ describe('should render the community page', () => {
 })
 
 describe('should render the daily page', () => {
-  it.only('should render the daily page', () => {
+  it('should render the daily page', () => {
     cy.visit('/daily');
     cy.get('h2').should('contain', 'COMING SOON');
   })
