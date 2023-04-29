@@ -8,9 +8,10 @@ export default function Type() {
 
   const[data, setData] = useState([])
 
-  const[actualType, setActualType] = useState('dragon')
+  const[actualType, setActualType] = useState('fire')
   const[type, setType] = useState([])
   const[shiny, setShiny] = useState(false)
+  const [startingPokedex, setStartingPokedex] = useState(200)
   const [filteredResult, setFilteredResult] = useState(type);
 
   function showShiny(){
@@ -33,7 +34,7 @@ export default function Type() {
 const getTypePokemon = useCallback(() => {
   const fetchData = async () => {
       const requests = []
-      for(let i = 1; i < 906; i++) {
+      for(let i = 1; i < startingPokedex; i++) {
           requests.push(axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`))
       }
       try {
@@ -45,7 +46,7 @@ const getTypePokemon = useCallback(() => {
           //AGGIUNGI IL FILTRAGGIO DEI DATI DRAGON
           const currentType = []
           pokemonData.map(item => {
-            if(item.types[0].type.name === 'dragon' || item?.types[1]?.type?.name === 'dragon'){
+            if(item.types[0].type.name === 'fire' || item?.types[1]?.type?.name === 'fire'){
               currentType.push(item)
             }
           })
@@ -56,7 +57,7 @@ const getTypePokemon = useCallback(() => {
       }
   }
   fetchData()
-}, [])
+}, [startingPokedex])
 
 
 //VA AD INNESCARE UNA SOLA VOLTA LO useCallback con la chiamata API
@@ -93,7 +94,17 @@ useEffect(() => {
 
 
 
-console.log(data)
+function handleShowMore(){
+  if(startingPokedex < 906 && startingPokedex > 805){
+    setStartingPokedex(prevStartingPokedex => prevStartingPokedex +(906 - prevStartingPokedex))
+  }else{
+    setStartingPokedex(prevStartingPokedex => prevStartingPokedex + 102)
+  }
+}
+
+
+
+
 
 
 
@@ -151,6 +162,10 @@ const handleInputChange = (event) => {
           </div>
         ))}
         
+        </div>
+
+        <div className="button-section">
+            {startingPokedex < 906 && <button className="show-button" onClick={handleShowMore}>Show More</button>}
         </div>
 
     </div>
