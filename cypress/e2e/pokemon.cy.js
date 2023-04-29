@@ -143,6 +143,10 @@ describe('Legendary page', () => {
 
 
 
+
+
+
+
 describe('Type page', () => {
 
   it('should render all the type buttons', () => {
@@ -154,7 +158,7 @@ describe('Type page', () => {
   })
 
 
-  it.only('should render the shiny Pokemon', () => {
+  it('should render the shiny Pokemon', () => {
 
     cy.visit('/types')
 
@@ -190,6 +194,8 @@ describe('Type page', () => {
   })
   
 })
+
+
 
 
 
