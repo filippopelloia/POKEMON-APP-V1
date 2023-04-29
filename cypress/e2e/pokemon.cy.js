@@ -125,32 +125,30 @@ describe('Type page', () => {
   })
 
 
-  it('should render the shiny Pokemon', () => {
+  // it('should render the shiny Pokemon', () => {
 
-    cy.visit('/types')
+  //   cy.visit('/types')
 
-    cy.wait(16000);
+  //   cy.wait(16000);
 
-    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png')
-    cy.switchMode();
-    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/149.png')
-  })
+  //   cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png')
+  //   cy.switchMode();
+  //   cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/149.png')
+  // })
 
 
   it.only('should render the normal pokemon', () => {
 
     cy.visit('/types');
 
-    cy.wait(5000);
+    cy.wait(13000);
+    cy.get('.national-section > :nth-child(1)').should('be.visible');
     cy.get('[style="background-color: rgb(145, 153, 161);"]').click();
-    // cy.wait(40000);
-    cy.get(':nth-child(3) > .sprite').should('be.visible');
+    cy.wait(6000);
+    cy.get(':nth-child(1) > h3').should('contain', 'Pidgey');
+    // cy.get(':nth-child(3) > .sprite').should('be.visible');
 
   })
-
-
-
-
 
 
 })

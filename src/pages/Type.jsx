@@ -3,7 +3,10 @@ import Header from '../components/Header.jsx'
 import axios from 'axios'
 
 
+
 export default function Type() {
+
+  const[data, setData] = useState([])
 
   const[actualType, setActualType] = useState('dragon')
   const[type, setType] = useState([])
@@ -20,47 +23,77 @@ export default function Type() {
   const CurrentType = actualType[0].toUpperCase() + actualType.slice(1)
 
 
+  //PARTE QUANDO PREMO SU UN BUTTON, QUESTO CAMBIA L'actualType E INNESCA useCallback
   function showType(tipo){
     setActualType(tipo)
   }
 
 
-  const getTypePokemon = useCallback(() => {
-    const fetchData = async () => {
-        const requests = []
-        for(let i = 1; i < 906; i++) {
-            requests.push(axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`))
-        }
-        try {
-            const responses = await Promise.all(requests)
-            const pokemonData = responses.map(res => res.data)
 
-            const currentType = []
+const getTypePokemon = useCallback(() => {
+  const fetchData = async () => {
+      const requests = []
+      for(let i = 1; i < 906; i++) {
+          requests.push(axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`))
+      }
+      try {
+          const responses = await Promise.all(requests)
+          const pokemonData = responses.map(res => res.data)
 
-            //IL PRIMO TIPO EQUIVALE.. O IL SECONDO TIPO EQUIVALE..
-            pokemonData.map(item => {
-              if(item.types[0].type.name === actualType | item?.types[1]?.type?.name === actualType){
-                currentType.push(item)
-              }
-            })
-            setType(currentType)
+          setData(pokemonData)
 
-        } catch (error) {
-            console.error(error)
-        }
-    }
-    fetchData()
-}, [actualType])
+          //AGGIUNGI IL FILTRAGGIO DEI DATI DRAGON
+          const currentType = []
+          pokemonData.map(item => {
+            if(item.types[0].type.name === 'dragon' || item?.types[1]?.type?.name === 'dragon'){
+              currentType.push(item)
+            }
+          })
+          setType(currentType)
+
+      } catch (error) {
+          console.error(error)
+      }
+  }
+  fetchData()
+}, [])
 
 
+//VA AD INNESCARE UNA SOLA VOLTA LO useCallback con la chiamata API
 useEffect(() => {
   getTypePokemon()
 }, [getTypePokemon])
 
 
+
+
+
+//FILTRAGGIO DEI POKEMON IN BASE AL TIPO
+useEffect(() => {
+
+  const currentType = []
+  data.map(item => {
+    if(item.types[0].type.name === actualType | item?.types[1]?.type?.name === actualType){
+      currentType.push(item)
+    }
+  })
+  setType(currentType)
+
+}, [actualType])
+
+
+
+
+
+//UTILE PER POI VISUALIZZARE I POKEMON CHE HO APPENA PRESO E FILTRATO CON LO useCallback
 useEffect(() => {
   setFilteredResult(type)
 }, [type])
+
+
+
+
+console.log(data)
 
 
 
@@ -97,7 +130,7 @@ const handleInputChange = (event) => {
           <button className="type-btn" style={{backgroundColor: '#EB8FE6'}} onClick={() => showType('fairy')}>Fairy</button>
         </div>
 
-
+        
         <h2 className="type-current">Type: {CurrentType}</h2>
 
 
