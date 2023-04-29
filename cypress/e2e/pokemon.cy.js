@@ -33,8 +33,7 @@ describe('National page', () => {
 
     cy.wait(3000)
     cy.get('[data-testid="bulbasaur"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png')
-    cy.get('.slider').should('be.visible')
-    cy.get('.slider').click();
+    cy.switchMode();
     cy.get('[data-testid="bulbasaur"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png')
   })
 
@@ -74,18 +73,84 @@ describe('Regions page', () => {
     cy.get('.national-section').find('.pokemon-section').should('have.length', 151);
   })
 
+
+  it('should render the shiny Pokemon', () => {
+
+    cy.visit('/regions')
+
+    cy.wait(3000)
+    cy.get('[data-testid="grookey"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/810.png')
+    cy.switchMode();
+    cy.get('[data-testid="grookey"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/810.png')
+  })
+
 })
 
 
 
 describe('Legendary page', () => {
 
-  it.only('should render', () => {
+  it('should render', () => {
 
-    cy.visit('/legendary');
+    cy.visit('/legendaries');
 
-    
+    cy.wait(3000);
+    cy.get('.national-section').find('.pokemon-section').should('have.length', 77);
 
   })
+
+
+  it('should render the shiny Pokemon', () => {
+
+    cy.visit('/legendaries')
+
+    cy.wait(3000)
+    cy.get('[data-testid="articuno"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png')
+    cy.switchMode();
+    cy.get('[data-testid="articuno"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/144.png')
+  })
+
+})
+
+
+
+describe('Type page', () => {
+
+  it('should render all the type buttons', () => {
+
+    cy.visit('/types')
+
+    cy.get('.type-btn').should('have.length', 18);
+
+  })
+
+
+  it('should render the shiny Pokemon', () => {
+
+    cy.visit('/types')
+
+    cy.wait(16000);
+
+    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png')
+    cy.switchMode();
+    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/149.png')
+  })
+
+
+  it.only('should render the normal pokemon', () => {
+
+    cy.visit('/types');
+
+    cy.wait(5000);
+    cy.get('[style="background-color: rgb(145, 153, 161);"]').click();
+    // cy.wait(40000);
+    cy.get(':nth-child(3) > .sprite').should('be.visible');
+
+  })
+
+
+
+
+
 
 })
