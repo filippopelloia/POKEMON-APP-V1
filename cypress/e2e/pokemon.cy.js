@@ -105,6 +105,9 @@ describe('Regions page', () => {
 
 
 
+
+
+
 describe('Legendary page', () => {
 
   it('should render', () => {
@@ -151,16 +154,16 @@ describe('Type page', () => {
   })
 
 
-  // it('should render the shiny Pokemon', () => {
+  it.only('should render the shiny Pokemon', () => {
 
-  //   cy.visit('/types')
+    cy.visit('/types')
 
-  //   cy.wait(16000);
+    cy.wait(5000);
 
-  //   cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png')
-  //   cy.switchMode();
-  //   cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/149.png')
-  // })
+    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png')
+    cy.switchMode();
+    cy.get(':nth-child(3) > .sprite').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png')
+  })
 
 
   it('should render the normal pokemon', () => {
