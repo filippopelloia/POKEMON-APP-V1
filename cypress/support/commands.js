@@ -31,3 +31,9 @@ Cypress.Commands.add('switchMode', () => {
     cy.get('.slider').click();
 })
 
+
+Cypress.Commands.add('inputSearchMewtwo', () => {
+    cy.get('.search').type('Mewtwo');
+    cy.get(':nth-child(1) > h3').should('contain', 'Mewtwo');
+})
+

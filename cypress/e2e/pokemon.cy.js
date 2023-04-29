@@ -38,13 +38,14 @@ describe('National page', () => {
   })
 
 
-  it('should render result of a search', () => {
+  it('should render result of Mewtwo search', () => {
 
     cy.visit('/')
 
-    cy.wait(2000);
-    cy.get('.search').type('Primeape');
-    cy.get('[data-testid="sections"]').should('be.visible');
+    cy.wait(4000);
+    cy.get('.show-button').click();
+    cy.wait(3000);
+    cy.inputSearchMewtwo();
   })
 
 })
@@ -84,6 +85,17 @@ describe('Regions page', () => {
     cy.get('[data-testid="grookey"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/810.png')
   })
 
+
+  it('should render result of Mewtwo search', () => {
+
+    cy.visit('/regions')
+
+    cy.wait(3000);
+    cy.get('.regions > :nth-child(1)').click();
+    cy.wait(3000);
+    cy.inputSearchMewtwo();
+  })
+
 })
 
 
@@ -108,6 +120,15 @@ describe('Legendary page', () => {
     cy.get('[data-testid="articuno"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png')
     cy.switchMode();
     cy.get('[data-testid="articuno"]').should('have.attr', 'src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/144.png')
+  })
+
+
+  it('should render result of Mewtwo search', () => {
+
+    cy.visit('/legendaries')
+
+    cy.wait(3000);
+    cy.inputSearchMewtwo();
   })
 
 })
@@ -137,18 +158,44 @@ describe('Type page', () => {
   // })
 
 
-  it.only('should render the normal pokemon', () => {
+  it('should render the normal pokemon', () => {
 
     cy.visit('/types');
 
-    cy.wait(13000);
+    cy.wait(20000);
     cy.get('.national-section > :nth-child(1)').should('be.visible');
     cy.get('[style="background-color: rgb(145, 153, 161);"]').click();
     cy.wait(6000);
     cy.get(':nth-child(1) > h3').should('contain', 'Pidgey');
-    // cy.get(':nth-child(3) > .sprite').should('be.visible');
 
   })
 
 
+  it('should render result of Mewtwo search', () => {
+
+    cy.visit('/types')
+
+    cy.wait(24000);
+    cy.get('[style="background-color: rgb(246, 113, 119);"]').click();
+    cy.wait(6000);
+    cy.inputSearchMewtwo();
+  })
+  
+})
+
+
+
+
+describe('should render the community page', () => {
+  it('should render the community page', () => {
+    cy.visit('/community');
+    cy.get('h2').should('contain', 'COMING SOON');
+  })
+})
+
+describe('should render the daily page', () => {
+  it.only('should render the daily page', () => {
+    cy.visit('/daily');
+    cy.get('h2').should('contain', 'COMING SOON');
+  })
 })
