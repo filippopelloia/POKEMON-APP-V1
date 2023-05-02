@@ -10,6 +10,7 @@ export default function Regions() {
   const[region, setRegion] = useState([])
   const [filteredResult, setFilteredResult] = useState(region);
   const[shiny, setShiny] = useState(false)
+  
 
   function showShiny(){
       setShiny(prevShiny => !prevShiny)

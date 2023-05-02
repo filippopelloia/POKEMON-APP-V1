@@ -2,6 +2,7 @@ import {render, screen, waitFor, fireEvent} from '@testing-library/react'
 import Legendary from './Legendary.jsx'
 import { setupServer } from 'msw/node';
 import { handlersLegendary } from '../mocks/handlers-legendaty.jsx'; 
+// import {server} 
 
 
 // // CREO SERVER MSW
@@ -34,6 +35,10 @@ describe('FAKE API tests', () => {
             expect(mewtwoImage).toHaveAttribute('src', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/150.png');
         }, {timeout: 5000})
     })
+
+    // it('renders error', () => {
+
+    // })
 
 })
 

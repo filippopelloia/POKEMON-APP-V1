@@ -25,7 +25,7 @@ const getNationalPokemon = React.useCallback(() => {
   const fetchData = async () => {
       const requests = []
       for(let i = 1; i < startingPokedex; i++) {
-          requests.push(axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`))
+          requests.push(axios.get(`https://pokeapi.co/api/v3/pokemon/${i}`))
       }
       try {
           const responses = await Promise.all(requests)
@@ -34,8 +34,7 @@ const getNationalPokemon = React.useCallback(() => {
           setNational(pokemonData)
 
       } catch (error) {
-          // console.error(error)
-          setError('Error fetching National Pokedex')
+          setError(error.toJSON().message)
       }
   }
   fetchData()
@@ -78,35 +77,36 @@ const handleInputChange = (event) => {
 
   return (
     <div className="national main">
-            <Header shiny={shiny} changeMode={showShiny} handleInputChange={(event) => handleInputChange(event)} />
-      <div className="data-section">
-        <div className="national-section" style={{paddingBottom: '5.5vh'}}>
+      <Header shiny={shiny} changeMode={showShiny} handleInputChange={(event) => handleInputChange(event)} />
+      {error.length < 1 ?
+      <>
+        <div className="data-section">
+          <div className="national-section" style={{paddingBottom: '5.5vh'}}>
 
-          {/* {error === true && <p>{error}</p>} */}
+            {/* {error === true && <p>{error}</p>} */}
 
-          {filteredResult.map((item) => {
-          return (
-            <Card key={item.id} 
-                           id={item.id}
-                           shiny={shiny}
-                           name={item.name}
-                           upper={item.name[0]?.toUpperCase()}
-                           slice={item.name.slice(1)}
-                           front_shiny={item?.sprites?.front_shiny}
-                           front_default={item?.sprites?.front_default}
-                           firstType={item?.types[0].type.name}
-                           secondType={item?.types[1]?.type.name}
-            />
-          );
-        })}
+            {filteredResult.map((item) => {
+            return (
+              <Card key={item.id} 
+                            id={item.id}
+                            shiny={shiny}
+                            name={item.name}
+                            upper={item.name[0]?.toUpperCase()}
+                            slice={item.name.slice(1)}
+                            front_shiny={item?.sprites?.front_shiny}
+                            front_default={item?.sprites?.front_default}
+                            firstType={item?.types[0].type.name}
+                            secondType={item?.types[1]?.type.name}
+              />
+            );
+          })}
 
-
-
+          </div>
         </div>
-      </div>
-      <div className="button-section">
-            {startingPokedex < 906 && <button className="show-button" onClick={handleShowMore}>Show More</button>}
-      </div>
+        <div className="button-section">
+              {startingPokedex < 906 && <button className="show-button" onClick={handleShowMore}>Show More</button>}
+        </div>
+      </> : <h2 style={{textAlign: 'center', color: 'red'}}>{error}</h2>}
     </div>
   );
 }

@@ -4,6 +4,18 @@ const indexLegends = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377
 
 const handlersLegendary = indexLegends.map((id) => {
   return rest.get(`https://pokeapi.co/api/v2/pokemon/${id}`, (req, res, ctx) => {
+
+
+    // if (/* If error occurs */) {
+      return res(
+        ctx.status(500),
+        ctx.json({
+          error: 'An error occurred while fetching the pokemon data',
+        })
+      );
+    // }
+
+
     return res(
       ctx.status(200),
       ctx.json({
