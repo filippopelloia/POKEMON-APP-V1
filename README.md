@@ -1,4 +1,4 @@
-### This is a simple Pokedex made with React.js:
+### This is a simple Pokedex made with React.js
 This app includes a lot of data about Pokemon such as:
 1. Number in the National Pokedex.
 2. Name.
