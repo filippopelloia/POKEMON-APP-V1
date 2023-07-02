@@ -1,4 +1,5 @@
-### This app includes a lot of data about Pokemon such as:
+### This is a simple Pokedex made with React.js:
+This app includes a lot of data about Pokemon such as:
 1. Number in the National Pokedex.
 2. Name.
 3. Type or Types (such as Fire, Grass, Dark..).
